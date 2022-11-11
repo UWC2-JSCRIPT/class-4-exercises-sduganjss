@@ -1,3 +1,42 @@
+const getDeck = () => {
+  
+  const deck = [];
+  const suits = ['hearts', 'spades', 'clubs', 'diamonds'];
+  const nonNumericCards = {
+    11 : "Jack",
+    12 : "Queen",
+    13 : "King",
+    1 : "Ace"
+  }
+
+  for (let index = 0; index < suits.length; index++) {
+    
+    for (let j = 1; j <= 13; j++) {
+      let cardName = j
+      let cardValue = j
+      switch (j) {
+        case 1 :
+          cardName = nonNumericCards[j];
+          cardValue = j + 10; //1 represents Ace, but value is 11
+          break;
+        case 11:
+        case 12:
+        case 13:
+        cardName = nonNumericCards[j];
+      }
+      const card = {
+        suit: suits[index],
+        displayVal : cardName,
+        val : cardValue
+      }
+      deck.push(card);
+    }
+    
+  }
+  return deck;
+
+}
+
 const blackjackDeck = getDeck();
 
 /**
@@ -5,11 +44,20 @@ const blackjackDeck = getDeck();
  * @constructor
  * @param {string} name - The name of the player
  */
-class CardPlayer {}; //TODO
+class CardPlayer {
+  constructor(name) {
+    this.name = name;
+    hand = [];
+  }
+  drawCard() {
+    const randomCardNumber = Math.floor(Math.random() * 53);
+    hand.push(blackjackDeck[randomCardNumber])
+  }
+}; //TODO - added
 
 // CREATE TWO NEW CardPlayers
-const dealer; // TODO
-const player; // TODO
+const dealer = new CardPlayer("Player"); // TODO - added
+const player= new CardPlayer("Dealer"); // TODO - added
 
 /**
  * Calculates the score of a Blackjack hand
@@ -19,7 +67,13 @@ const player; // TODO
  * @returns {boolean} blackJackScore.isSoft
  */
 const calcPoints = (hand) => {
-  // CREATE FUNCTION HERE
+  const blackJackScore = {
+    total: 0,
+    isSoft: false
+  }
+  for (let card of hand) {
+      totalPoints += card.val
+  }
 
 }
 

@@ -3,6 +3,41 @@
  * @returns {Array} deck - a deck of cards
  */
 const getDeck = () => {
+  
+  const deck = [];
+  const suits = ['hearts', 'spades', 'clubs', 'diamonds'];
+  const nonNumericCards = {
+    11 : "Jack",
+    12 : "Queen",
+    13 : "King",
+    1 : "Ace"
+  }
+
+  for (let index = 0; index < suits.length; index++) {
+    
+    for (let j = 1; j <= 13; j++) {
+      let cardName = j
+      let cardValue = j
+      switch (j) {
+        case 1 :
+          cardName = nonNumericCards[j];
+          cardValue = j + 10; //1 represents Ace, but value is 11
+          break;
+        case 11:
+        case 12:
+        case 13:
+        cardName = nonNumericCards[j];
+      }
+      const card = {
+        suit: suits[index],
+        displayVal : cardName,
+        val : cardValue
+      }
+      deck.push(card);
+    }
+    
+  }
+  return deck;
 
 }
 
