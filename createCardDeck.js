@@ -2,31 +2,37 @@
  * Returns an array of 52 Cards
  * @returns {Array} deck - a deck of cards
  */
-const getDeck = () => {
+ const getDeck = () => {
   
   const deck = [];
   const suits = ['hearts', 'spades', 'clubs', 'diamonds'];
-  const nonNumericCards = {
+  //face card object
+  const faceCards = {
     11 : "Jack",
     12 : "Queen",
     13 : "King",
     1 : "Ace"
   }
-
+//iterate through suits
   for (let index = 0; index < suits.length; index++) {
-    
+  //then iterate through each set of 13 cards for a given suit  
     for (let j = 1; j <= 13; j++) {
+      //for most cards (2-10), card value is card name
       let cardName = j
       let cardValue = j
+      //but for everything else, it's a face card
       switch (j) {
         case 1 :
-          cardName = nonNumericCards[j];
+          //retrieve face card name
+          cardName = faceCards[j];
           cardValue = j + 10; //1 represents Ace, but value is 11
           break;
         case 11:
         case 12:
         case 13:
-        cardName = nonNumericCards[j];
+        cardName = faceCards[j];
+        //Jack, Queen, King are worth 10
+        cardValue = 10;
       }
       const card = {
         suit: suits[index],
@@ -39,23 +45,4 @@ const getDeck = () => {
   }
   return deck;
 
-}
-
-
-
-// CHECKS
-const deck = getDeck();
-console.log(`Deck length equals 52? ${deck.length === 52}`);
-
-const randomCard = deck[Math.floor(Math.random() * 52)];
-
-const cardHasVal = randomCard && randomCard.val && typeof randomCard.val === 'number';
-console.log(`Random card has val? ${cardHasVal}`);
-
-const cardHasSuit = randomCard && randomCard.suit && typeof randomCard.suit === 'string';
-console.log(`Random card has suit? ${cardHasSuit}`);
-
-const cardHasDisplayVal = randomCard &&
-  randomCard.displayVal &&
-  typeof randomCard.displayVal === 'string';
-console.log(`Random card has display value? ${cardHasDisplayVal}`);
+};
